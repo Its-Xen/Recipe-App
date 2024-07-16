@@ -1,0 +1,11 @@
+<!--  Extend from recipes/base.html -->
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+        <h1 >Log In Form</h1>
+        {{ form.as_p }}
+    <button class="btn btn-outline-info" type="submit">Login</button>
+</form>
+
+<h3>Need An Account? <a href="{% url 'register' %}" style="text-decoration:none;">Sign Up Now</a></h3>
+{% endblock content %}
