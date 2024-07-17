@@ -1,0 +1,46 @@
+{% extends "_base.html" %}
+
+
+{% block content %}
+
+<!-- ex -->
+
+<!-- ex -->
+{% if user.is_authenticated %}
+<h2><a href="{% url 'profile' %} " style="text-decoration:none;"> hi {{ user.username }} :)) </a></h2> 
+<a href="{% url 'recipe-create' %}">+New Post</a> | <a href="{% url 'logout' %} " style="text-decoration:none;"> Log Out</a> 
+<hr>
+{% for post in posts %}
+    <h3><a href="{% url 'recipe-detail' post.pk %}">{{ post.recipe }}</a></h3>
+{% endfor %}
+
+<!-- <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div> -->
+
+
+{% else %}
+<h3> You Loged out</h3>
+<h4>Log In:</h3>
+<a href="{% url 'login' %} " style="text-decoration:none;">Log In</a>
+<h4>Sign Up:</h3>
+<a href="{% url 'register' %} " style="text-decoration:none;"> Sign Up</a>
+{% endif %}
+
+
+
+{% endblock %}

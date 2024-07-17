@@ -1,0 +1,13 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<h2>Delete Recipe</h2>
+<h3> Are You Sure To Delete {{post.recipe}}?</h3>
+<form method="post" >
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">YES</button>
+</form>
+<a href="{% url 'recipe-home'%}"><button style="color: red;" type="submit">No</button></a>
+
+{% endblock %}

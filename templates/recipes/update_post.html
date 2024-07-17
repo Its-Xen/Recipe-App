@@ -1,0 +1,12 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<h2>Update Recipe</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+<a href="{% url 'recipe-home'%}"><button style="color: red;" type="submit">Cancel</button></a>
+
+{% endblock %}
