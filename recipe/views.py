@@ -1,8 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models.query import QuerySet
-from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from .forms import PostForm
+from django.urls import reverse_lazy
 from .models import Post, Category
 
 class RecipeListView(ListView):
@@ -15,12 +14,13 @@ class RecipeListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
+        context['selected_category'] = self.request.GET.get('category', 'All')
         return context
-    
+
     def get_queryset(self):
         category_name = self.request.GET.get('category')
-        if category_name:
-            return Post.objects.filter(category__name = category_name)
+        if category_name and category_name != 'All':
+            return Post.objects.filter(category__name=category_name)
         return Post.objects.all()
 
 class RecipeDetailView(LoginRequiredMixin, DetailView):
