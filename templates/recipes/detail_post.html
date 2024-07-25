@@ -1,16 +1,17 @@
 {% extends "_base.html" %}
-{% load static %}
-
+{% block title %}{{ post.recipe }}{% endblock %}
 {% block content %}
-<h1><a href="{% url 'recipe-detail' post.pk %}"> Detail View </a></h1>
-<hr>
-<h2> {{ post.recipe}}</h2>
-<img src="{{ post.image.url }}">
-<h3> {{ post.desc}}</h3>
-<h5> {{post.author}} --- {{post.date}}  </h5>
-<a href="{% url 'recipe-home' %}"><button>HOME</button></a>
-<a href="{% url 'recipe-update' post.pk %}"><button>Update</button></a>
-<a href="{% url 'recipe-delete' post.pk %}"><button>Delete</button></a>
-
-
+<div class="row">
+    <div class="col-md-8">
+        <h2>{{ post.recipe }}</h2>
+        <p>{{ post.desc }}</p>
+        {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.recipe }}" class="img-fluid">
+        {% endif %}
+    </div>
+    <div class="col-md-4">
+        <a href="{% url 'recipe-update' post.pk %}" class="btn btn-secondary btn-block">Edit</a>
+        <a href="{% url 'recipe-delete' post.pk %}" class="btn btn-danger btn-block">Delete</a>
+    </div>
+</div>
 {% endblock %}

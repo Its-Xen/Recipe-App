@@ -1,46 +1,64 @@
 {% extends "_base.html" %}
-
-
 {% block content %}
-
-<!-- ex -->
-
-<!-- ex -->
-{% if user.is_authenticated %}
-<h2><a href="{% url 'profile' %} " style="text-decoration:none;"> hi {{ user.username }} :)) </a></h2> 
-<a href="{% url 'recipe-create' %}">+New Post</a> | <a href="{% url 'logout' %} " style="text-decoration:none;"> Log Out</a> 
-<hr>
-{% for post in posts %}
-    <h3><a href="{% url 'recipe-detail' post.pk %}">{{ post.recipe }}</a></h3>
-{% endfor %}
-
-<!-- <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div> -->
-
-
-{% else %}
-<h3> You Loged out</h3>
-<h4>Log In:</h3>
-<a href="{% url 'login' %} " style="text-decoration:none;">Log In</a>
-<h4>Sign Up:</h3>
-<a href="{% url 'register' %} " style="text-decoration:none;"> Sign Up</a>
-{% endif %}
-
-
-
-{% endblock %}
+    <h1>Recipes</h1>
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="btn-group" role="group" aria-label="Category filter">
+                <a href="{% url 'recipe-home' %}?category=All" class="btn btn-secondary {% if selected_category == 'All' %}active{% endif %}">All</a>
+                {% for category in categories %}
+                    <a href="{% url 'recipe-home' %}?category={{ category.name }}" class="btn btn-secondary {% if selected_category == category.name %}active{% endif %}">{{ category.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-md-4 d-flex align-items-stretch">
+                <div class="card mb-4 shadow-sm w-100">
+                    <div class="card-img-container">
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.recipe }}">
+                        {% endif %}
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ post.recipe }}</h5>
+                        <p class="card-text">{{ post.desc|truncatewords:20 }}</p>
+                        <div class="mt-auto">
+                            <div class="btn-group">
+                                <a href="{% url 'recipe-detail' post.pk %}" class="btn btn-sm btn-outline-secondary">View</a>
+                            </div>
+                            <small class="text-muted">{{ post.date }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    {% if posts.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% if selected_category != 'All' %}category={{ selected_category }}&{% endif %}page={{ posts.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% for page_num in posts.paginator.page_range %}
+                        <li class="page-item {% if posts.number == page_num %}active{% endif %}">
+                            <a class="page-link" href="?{% if selected_category != 'All' %}category={{ selected_category }}&{% endif %}page={{ page_num }}">{{ page_num }}</a>
+                        </li>
+                    {% endfor %}
+                    {% if posts.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% if selected_category != 'All' %}category={{ selected_category }}&{% endif %}page={{ posts.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endblock content %}
