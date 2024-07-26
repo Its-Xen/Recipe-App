@@ -51,3 +51,8 @@ This is a recipe app project where users can browse, view, and create recipes. T
 Feel free to customize the project to fit your needs and enjoy sharing and discovering recipes with Recipe Whiz!
 
 # Screenshots : 
+<img src="ScreenShots/screenshot1.png" height="400" width="800">
+<img src="ScreenShots/screenshot2.png" height="400" width="800">
+<img src="ScreenShots/screenshot3.png" height="400" width="800">
+<img src="ScreenShots/screenshot4.png" height="400" width="800">
+<img src="ScreenShots/screenshot5.png" height="400" width="800">
