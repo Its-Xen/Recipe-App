@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe App</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'js/scripts.js' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -17,17 +19,31 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'recipe-home' %}">Home</a>
+                    <a class="nav-link" href="{% url 'recipe-home' %}">
+                        <i class="fas fa-home"></i> Home
+                    </a>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                        <a class="nav-link" href="{% url 'recipe-create' %}">
+                            <i class="fas fa-plus"></i>  Recipe
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'recipe-create' %}">Create Recipe</a>
+                    <li>
+                        <a class="nav-link" href="{% url 'recipe-info' %}">
+                            <i class="fas fa-info-circle"></i> Info
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    <li class="nav-item dropdown">
+                        <img src="{{ user.profile.image.url }}" class="rounded-circle" style="width: 50px; cursor: pointer;" alt="Avatar" id="avatar">
+                        <div class="dropdown-menu dropdown-menu-right" id="dropdown">
+                            <a class="dropdown-item" href="{% url 'profile' %}">
+                                <i class="fas fa-user"></i> Profile
+                            </a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
                     </li>
                 {% else %}
                     <li class="nav-item">
@@ -35,6 +51,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{% url 'recipe-info' %}">
+                            <i class="fas fa-info-circle"></i>Info
+                        </a>
                     </li>
                 {% endif %}
             </ul>
@@ -52,5 +73,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>

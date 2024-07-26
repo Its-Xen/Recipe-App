@@ -5,6 +5,8 @@
     <div class="col-md-8">
         <h2>{{ post.recipe }}</h2>
         <p>{{ post.desc }}</p>
+        <p><b> {{ post.author }} | {{post.date}}</b></p>
+
         {% if post.image %}
         <img src="{{ post.image.url }}" alt="{{ post.recipe }}" class="img-fluid">
         {% endif %}
