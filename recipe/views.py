@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from .forms import PostForm
@@ -64,3 +65,7 @@ class RecipeDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('recipe-home')
+    
+
+def About(request):
+    return render(request, 'about.html')
