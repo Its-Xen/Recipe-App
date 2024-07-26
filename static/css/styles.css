@@ -59,3 +59,40 @@ footer {
 .card .mt-auto {
     margin-top: auto;
 }
+
+.avatar {
+    position: relative;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 60px; /* Adjust this value if necessary */
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    overflow: hidden;
+    min-width: 150px; /* Ensures the dropdown has a minimum width */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
